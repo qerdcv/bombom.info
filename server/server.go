@@ -1,13 +1,23 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/qerdcv/bombom.info/config"
+)
 
 type Server struct {
+	conf config.Config
+
 	*gin.Engine
 }
 
-func New() *Server {
+func New(conf config.Config) *Server {
+	if conf.IsProdEnv() {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	s := &Server{
+		conf,
 		gin.Default(),
 	}
 
