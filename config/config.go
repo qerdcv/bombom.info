@@ -16,8 +16,10 @@ const (
 )
 
 type Config struct {
-	Env string `split_words:"true" required:"true"`
-	BS  `split_words:"true" required:"true"`
+	Env     string `split_words:"true" required:"true"`
+	ClubTag string `split_words:"true" required:"true"`
+
+	BS `split_words:"true" required:"true"`
 }
 
 func New() (conf Config, err error) {

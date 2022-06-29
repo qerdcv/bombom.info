@@ -1,0 +1,69 @@
+.members {
+    width: 600px;
+
+}
+
+.member {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 5px 0;
+
+    background: #888;
+
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 4px solid black;
+    border-bottom: 4px solid black;
+}
+
+.member-info {
+    display: flex;
+
+    padding: 4px;
+}
+
+.member-name-rolled {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 20px;
+
+    margin: 0 10px;
+}
+
+.member-role {
+    font-size: 16px;
+
+    color: #000;
+}
+
+.member-name {
+    font-size: 20px;
+
+    text-shadow: 2px 2px 2px black;
+
+    cursor: help;
+}
+
+.member-place {
+    display: inline-block;
+
+    width: 41px;
+    height: 41px;
+    padding: 3px;
+
+    text-align: center;
+
+    background: #777;
+}
+
+.member-meta-info {
+    display: flex;
+}
+
+.member-trophies {
+    font-size: 20px;
+    padding: 10px 10px 10px 30px;
+    background: #777;
+}

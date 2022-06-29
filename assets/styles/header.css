@@ -1,0 +1,19 @@
+
+
+header {
+    display: flex;
+    justify-content: center;
+
+    padding: 20px;
+    font-size: 40px;
+}
+
+
+.header-tag {
+    font-size: 18px;
+}
+
+.header-trophies {
+    text-decoration: underline;
+}
+

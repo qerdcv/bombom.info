@@ -6,20 +6,46 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BomBom Clan</title>
+        <title>BomBom Brawl Stars Club</title>
 
         <link rel="stylesheet" href="/assets/styles/index.css">
+        <link rel="stylesheet" href="/assets/styles/club.css">
+        <link rel="stylesheet" href="/assets/styles/header.css">
 
         <script defer src="/assets/scripts/index.js"></script>
     </head>
     <body>
 
     <div class="container">
-        <header>BomBom</header>
-        <main>body</main>
+        <header>
+            <span class="header-tag">[{{ .Tag }}]</span>
+            <span class="header-name">{{ .Name }}</span>&nbsp;
+            <span class="header-trophies">{{ .Trophies }}🏆</span>
+        </header>
+        <main>
+            {{ .Description }}
+            <div class="members">
+                {{ range $i, $member := .Members }}
+                    <div class="member">
+                        <div class="member-info">
+                            <span class="member-place">{{ inc $i }}</span>
+                            <div class="member-name-rolled">
+                                <span class="member-name" style="color:#{{ slice $member.NameColor 4 }}">
+                                    {{ $member.Name }}
+                                </span>
+                                <span class="member-role">{{ $member.Role }}</span>
+                            </div>
+                        </div>
+                        <div class="member-meta-info">
+                            <span class="curved-block"></span>
+                            <span class="member-trophies">{{ $member.Trophies }}🏆</span>
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+        </main>
         <footer>footer</footer>
     </div>
-
     </body>
     </html>
 {{ end }}
