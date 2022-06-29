@@ -30,7 +30,11 @@
                         <div class="member-info">
                             <span class="member-place">{{ inc $i }}</span>
                             <div class="member-name-rolled">
-                                <span class="member-name" style="color:#{{ slice $member.NameColor 4 }}">
+                                <span
+                                    title="{{ $member.Tag}}"
+                                    class="member-name"
+                                    style="color:#{{ slice $member.NameColor 4 }}"
+                                >
                                     {{ $member.Name }}
                                 </span>
                                 <span class="member-role">{{ $member.Role }}</span>
