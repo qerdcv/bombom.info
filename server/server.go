@@ -3,25 +3,27 @@ package server
 import (
 	"html/template"
 
+	"github.com/qerdcv/bombom.info/service"
+
 	"github.com/gin-gonic/gin"
-	"github.com/qerdcv/bombom.info/client"
 	"github.com/qerdcv/bombom.info/config"
 )
 
 type Server struct {
-	conf   config.Config
-	client *client.BS
+	conf config.Config
+
+	service *service.Service
 	*gin.Engine
 }
 
-func New(conf config.Config) *Server {
+func New(conf config.Config, service *service.Service) *Server {
 	if conf.IsProdEnv() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	s := &Server{
 		conf,
-		client.New(conf),
+		service,
 		gin.Default(),
 	}
 

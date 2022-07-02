@@ -12,14 +12,14 @@ import (
 )
 
 var (
-	ErrNoClubFound = errors.New("no club found")
+	ErrNotFound = errors.New("no club found")
 )
 
 type BS struct {
 	*resty.Client
 }
 
-func New(conf config.Config) *BS {
+func New(conf config.BS) *BS {
 	return &BS{
 		resty.New().
 			SetHeader("Content-Type", "application/json").
@@ -35,7 +35,7 @@ func (bs *BS) GetClubByTag(tag string) (club domain.Club, err error) {
 	}
 
 	if resp.StatusCode() == http.StatusNotFound {
-		return club, ErrNoClubFound
+		return club, ErrNotFound
 	}
 
 	return club, nil

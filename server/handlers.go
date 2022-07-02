@@ -5,13 +5,14 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/qerdcv/bombom.info/client"
+
+	"github.com/qerdcv/bombom.info/service"
 )
 
 func (s *Server) index(c *gin.Context) {
-	club, err := s.client.GetClubByTag(s.conf.ClubTag)
+	club, err := s.service.GetClubByTag(s.conf.ClubTag)
 	if err != nil {
-		if errors.Is(err, client.ErrNoClubFound) {
+		if errors.Is(err, service.ErrClubNotFound) {
 			c.HTML(http.StatusNotFound, "notFound", gin.H{})
 
 			return
