@@ -29,9 +29,14 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
 
     height: 100%;
     width: 100%;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 footer {
