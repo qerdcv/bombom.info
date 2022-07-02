@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/assets/styles/index.css">
         <link rel="stylesheet" href="/assets/styles/club.css">
         <link rel="stylesheet" href="/assets/styles/header.css">
+        <link rel="stylesheet" href="/assets/styles/form.css">
 
         <script defer src="/assets/scripts/index.js"></script>
     </head>
@@ -23,7 +24,10 @@
             <span class="header-trophies">{{ .Trophies }}🏆</span>
         </header>
         <main>
-            {{ .Description }}
+            {{ template "request_form" }}
+            <div class="description">
+                {{ .Description }}
+            </div>
             <div class="members">
                 {{ range $i, $member := .Members }}
                     <div class="member">
@@ -31,9 +35,9 @@
                             <span class="member-place">{{ inc $i }}</span>
                             <div class="member-name-rolled">
                                 <span
-                                    title="{{ $member.Tag}}"
-                                    class="member-name"
-                                    style="color:#{{ slice $member.NameColor 4 }}"
+                                        title="{{ $member.Tag}}"
+                                        class="member-name"
+                                        style="color:#{{ slice $member.NameColor 4 }}"
                                 >
                                     {{ $member.Name }}
                                 </span>
@@ -52,4 +56,20 @@
     </div>
     </body>
     </html>
+{{ end }}
+
+{{ define "request_form" }}
+    <form method="post" class="form">
+        <div class="form-control">
+            <label for="tag">User tag:</label>
+            <input id="tag" name="tag" type="text" class="input" autocomplete="off">
+        </div>
+        <div class="form-control">
+            <label for="telegram">Telegram:</label>
+            <input id="telegram" name="telegram" type="text" class="input" autocomplete="off">
+        </div>
+        <div class="form-control">
+            <input class="btn" type="submit" value="Request to join">
+        </div>
+    </form>
 {{ end }}

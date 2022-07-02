@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-resty/resty/v2"
+
 	"github.com/qerdcv/bombom.info/config"
 	"github.com/qerdcv/bombom.info/domain"
 )
