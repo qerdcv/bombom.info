@@ -16,8 +16,9 @@ const (
 )
 
 type Config struct {
-	Env     string `split_words:"true" required:"true"`
-	ClubTag string `split_words:"true" required:"true"`
+	Env       string `split_words:"true" required:"true"`
+	RateLimit int    `split_words:"true" required:"true" default:"1"`
+	ClubTag   string `split_words:"true" required:"true"`
 
 	BSApi BS  `split_words:"true" required:"true"`
 	Bot   Bot `split_words:"true" required:"true"`

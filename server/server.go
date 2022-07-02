@@ -27,6 +27,7 @@ func New(conf config.Config, service *service.Service) *Server {
 		gin.Default(),
 	}
 
+	s.Use(rateLimit(s.conf.RateLimit))
 	// templ := template.Must(template.New("").ParseFS(templates.Templates, "*.gohtml"))
 
 	s.SetFuncMap(template.FuncMap{
@@ -45,5 +46,5 @@ func New(conf config.Config, service *service.Service) *Server {
 
 func (s *Server) setupRoutes() {
 	s.GET("", s.index)
-	s.POST("", s.requestToJoin)
+	s.POST("/join", s.requestToJoin)
 }
