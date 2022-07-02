@@ -8,15 +8,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>BomBom Brawl Stars Club</title>
 
-        <link rel="stylesheet" href="/assets/styles/index.css">
-        <link rel="stylesheet" href="/assets/styles/club.css">
-        <link rel="stylesheet" href="/assets/styles/header.css">
-        <link rel="stylesheet" href="/assets/styles/form.css">
+        {{ template "includes" }}
 
-        <script defer src="/assets/scripts/index.js"></script>
     </head>
     <body>
-
+    {{ with .Club }}
     <div class="container">
         <header>
             <span class="header-tag">[{{ .Tag }}]</span>
@@ -54,6 +50,7 @@
         </main>
         <footer>footer</footer>
     </div>
+    {{ end }}
     </body>
     </html>
 {{ end }}
@@ -62,11 +59,11 @@
     <form method="post" class="form">
         <div class="form-control">
             <label for="tag">User tag:</label>
-            <input id="tag" name="tag" type="text" class="input" autocomplete="off">
+            <input id="tag" name="tag" type="text" class="input" autocomplete="off" required>
         </div>
         <div class="form-control">
             <label for="telegram">Telegram:</label>
-            <input id="telegram" name="telegram" type="text" class="input" autocomplete="off">
+            <input id="telegram" name="telegram" type="text" class="input" autocomplete="off" required>
         </div>
         <div class="form-control">
             <input class="btn" type="submit" value="Request to join">

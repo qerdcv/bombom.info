@@ -40,3 +40,16 @@ func (bs *BS) GetClubByTag(tag string) (club domain.Club, err error) {
 
 	return club, nil
 }
+
+func (bs *BS) GetPlayerByTag(tag string) (player domain.Player, err error) {
+	resp, err := bs.R().SetResult(&player).SetPathParam("playerTag", tag).Get("/players/{playerTag}")
+	if err != nil {
+		return player, fmt.Errorf("get clubs by tag: %w", err)
+	}
+
+	if resp.StatusCode() == http.StatusNotFound {
+		return player, ErrNotFound
+	}
+
+	return player, nil
+}

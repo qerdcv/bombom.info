@@ -45,4 +45,5 @@ func New(conf config.Config, service *service.Service) *Server {
 
 func (s *Server) setupRoutes() {
 	s.GET("", s.index)
+	s.POST("", s.requestToJoin)
 }

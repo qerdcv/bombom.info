@@ -19,7 +19,8 @@ type Config struct {
 	Env     string `split_words:"true" required:"true"`
 	ClubTag string `split_words:"true" required:"true"`
 
-	BSApi BS `split_words:"true" required:"true"`
+	BSApi BS  `split_words:"true" required:"true"`
+	Bot   Bot `split_words:"true" required:"true"`
 }
 
 func New() (conf Config, err error) {

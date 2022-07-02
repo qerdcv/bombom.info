@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/qerdcv/bombom.info/bot"
 	"github.com/qerdcv/bombom.info/client"
 	"github.com/qerdcv/bombom.info/service"
 
@@ -16,8 +18,13 @@ func run(*cli.Context) error {
 		return fmt.Errorf("config new: %w", err)
 	}
 
+	b, err := bot.New(conf)
+	if err != nil {
+		return fmt.Errorf("bot new: %w", err)
+	}
+
 	return server.New(
 		conf,
-		service.New(client.New(conf.BSApi)),
+		service.New(client.New(conf.BSApi), b),
 	).Run()
 }
