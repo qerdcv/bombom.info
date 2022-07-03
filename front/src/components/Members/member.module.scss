@@ -1,0 +1,60 @@
+.member {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 5px 0;
+
+  background: #888;
+
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 4px solid black;
+  border-bottom: 4px solid black;
+
+  &Name {
+    font-size: 20px;
+
+    text-shadow: 2px 2px 2px black;
+
+    cursor: help;
+  }
+
+  &Place {
+    display: inline-block;
+
+    width: 41px;
+    height: 41px;
+    padding: 3px;
+
+    text-align: center;
+
+    background: #777;
+  }
+
+  &Trophies {
+    font-size: 20px;
+    padding: 15px 10px 10px 30px;
+    background: #777;
+  }
+
+  &Role {
+    font-size: 16px;
+    color: #000;
+  }
+
+  &Info {
+    display: flex;
+    padding: 4px;
+  }
+
+  &NameRolled {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin: 0 10px;
+  }
+
+  &MetaInfo {
+    display: flex;
+  }
+}

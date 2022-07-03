@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+  font-size: 40px;
+
+  &Tag {
+    font-size: 18px;
+  }
+
+  &Trophies{
+    text-decoration: underline;
+  }
+
+  &Name {}
+}

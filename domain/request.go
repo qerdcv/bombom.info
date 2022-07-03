@@ -7,8 +7,8 @@ import (
 )
 
 type JoinRequest struct {
-	UserTag      string `json:"user_tag"`
-	TelegramName string `json:"telegram_name"`
+	UserTag      string `json:"userTag"`
+	TelegramName string `json:"telegramName"`
 }
 
 func (jr JoinRequest) String() string {
