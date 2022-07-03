@@ -1,7 +1,7 @@
 package server
 
 import (
-	"html/template"
+	"net/http"
 
 	"github.com/qerdcv/bombom.info/service"
 
@@ -27,17 +27,10 @@ func New(conf config.Config, service *service.Service) *Server {
 		gin.Default(),
 	}
 
-	s.Use(rateLimit(s.conf.RateLimit))
-	// templ := template.Must(template.New("").ParseFS(templates.Templates, "*.gohtml"))
-
-	s.SetFuncMap(template.FuncMap{
-		"inc": func(a int) int {
-			return a + 1
-		},
+	s.NoRoute(func(c *gin.Context) { c.JSON(http.StatusNotFound, ErrorResponse{Message: "not found"}) })
+	s.NoMethod(func(c *gin.Context) {
+		c.JSON(http.StatusMethodNotAllowed, ErrorResponse{Message: "method not allowed"})
 	})
-
-	s.LoadHTMLGlob("templates/*.gohtml")
-	s.Static("/assets", "assets")
 
 	s.setupRoutes()
 
@@ -45,6 +38,12 @@ func New(conf config.Config, service *service.Service) *Server {
 }
 
 func (s *Server) setupRoutes() {
-	s.GET("", s.index)
-	s.POST("/join", s.requestToJoin)
+	r := s.Group("/api/v1")
+	{
+		r.GET("/ping", func(c *gin.Context) {
+			c.JSON(http.StatusOK, SuccessResponse{Message: "pong"})
+		})
+		r.GET("/clubs", s.getClubInfo)
+		r.Use(rateLimit(s.conf.RateLimit)).POST("/join", s.requestToJoin)
+	}
 }

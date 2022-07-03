@@ -10,43 +10,46 @@ import (
 	"github.com/qerdcv/bombom.info/service"
 )
 
-func (s *Server) index(c *gin.Context) {
+func (s *Server) getClubInfo(c *gin.Context) {
 	club, err := s.service.GetClubByTag(s.conf.ClubTag)
 	if err != nil {
 		if errors.Is(err, service.ErrClubNotFound) {
-			c.HTML(http.StatusNotFound, "notFound", gin.H{})
+			c.JSON(http.StatusNotFound, ErrorResponse{err.Error()})
 
 			return
 		}
 
-		_ = c.Error(err)
+		c.JSON(http.StatusInternalServerError, ErrorResponse{err.Error()})
 
 		return
 	}
 
-	c.HTML(http.StatusOK, "index", Context{
-		Status: c.Query("status"),
-		Club:   club,
-	})
+	c.JSON(http.StatusOK, club)
 }
 
 func (s *Server) requestToJoin(c *gin.Context) {
-	req := domain.JoinRequest{
-		UserTag:      c.PostForm("tag"),
-		TelegramName: c.PostForm("telegram"),
+	var req domain.JoinRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, ErrorResponse{err.Error()})
+
+		return
 	}
+
 	if err := s.service.RequestToJoin(req); err != nil {
 		switch {
 		case errors.Is(err, service.ErrInvalidJoinRequest):
-			c.HTML(http.StatusBadRequest, "index", err.Error())
+			c.JSON(http.StatusBadRequest, ErrorResponse{err.Error()})
 		case errors.Is(err, service.ErrPlayerNotFound):
-			c.HTML(http.StatusBadRequest, "error", fmt.Sprintf("%s: %s", err.Error(), req.UserTag))
+			c.JSON(
+				http.StatusBadRequest, ErrorResponse{fmt.Sprintf("%s: %s", err.Error(), req.UserTag)},
+			)
 		default:
-			c.HTML(http.StatusInternalServerError, "error", http.StatusText(http.StatusInternalServerError))
+			c.JSON(http.StatusInternalServerError, ErrorResponse{err.Error()})
 		}
 
 		return
 	}
 
-	c.Redirect(http.StatusFound, "?status=success")
+	c.JSON(http.StatusOK, SuccessResponse{"OK"})
 }
