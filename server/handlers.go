@@ -36,8 +36,6 @@ func (s *Server) requestToJoin(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(req)
-
 	if err := s.service.RequestToJoin(req); err != nil {
 		switch {
 		case errors.Is(err, service.ErrInvalidJoinRequest):
