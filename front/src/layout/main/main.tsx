@@ -10,6 +10,7 @@ import { IClub } from 'types';
 import { Description } from 'components/Description';
 import { JoinRequestForm } from 'components/Form';
 import { Loader } from 'components/Loader';
+import { ClubLeague } from 'components/ClubLeague';
 
 export const MainLayout = () => {
     const [club, setClub] = useState<IClub | undefined>();
@@ -28,9 +29,10 @@ export const MainLayout = () => {
 
     return (
         <>
+            <ClubLeague />
             <Header name={club?.name} tag={club?.tag} trophies={club?.trophies}/>
+            <JoinRequestForm />
             <main>
-                <JoinRequestForm />
                 { club?.description && <Description description={club?.description} /> }
                 { club?.members && <Members members={club?.members}/> }
             </main>
